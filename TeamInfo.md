@@ -11,9 +11,9 @@
 | Member1     |        Connie Lu       |
 | Member1     |   clu44@illinois.edu  |
 | Member2     |     Ayman Reza     |
-| Member2     |  areza6 |
+| Member2     |  areza6@illinois.edu |
 | Member3     |    William Deng             |
-| Member3     |          wd10              |
+| Member3     |          wd10@illinois.edu              |
 
 ## Project Information
 
