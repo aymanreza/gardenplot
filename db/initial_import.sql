@@ -52,7 +52,7 @@ OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
-SET location_id = @location_id,
+SET location_id = 14808,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
     tmax_c = TRIM(@tmax_c),
@@ -69,7 +69,7 @@ OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
-SET location_id = @location_id,
+SET location_id = 26378,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
     tmax_c = TRIM(@tmax_c),
@@ -86,7 +86,7 @@ OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
-SET location_id = @location_id,
+SET location_id = 16532,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
     tmax_c = TRIM(@tmax_c),
@@ -103,7 +103,7 @@ OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
-SET location_id = @location_id,
+SET location_id = 64,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
     tmax_c = TRIM(@tmax_c),
@@ -120,7 +120,7 @@ OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
-SET location_id = @location_id,
+SET location_id = 5526,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
     tmax_c = TRIM(@tmax_c),
@@ -137,7 +137,7 @@ OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
-SET location_id = @location_id,
+SET location_id = 16980,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
     tmax_c = TRIM(@tmax_c),
@@ -154,7 +154,7 @@ OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
-SET location_id = @location_id,
+SET location_id = 16289,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
     tmax_c = TRIM(@tmax_c),
@@ -171,7 +171,7 @@ OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
-SET location_id = @location_id,
+SET location_id = 17375,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
     tmax_c = TRIM(@tmax_c),
@@ -188,7 +188,7 @@ OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
-SET location_id = @location_id,
+SET location_id = 22084,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
     tmax_c = TRIM(@tmax_c),
@@ -205,7 +205,7 @@ OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
-SET location_id = @location_id,
+SET location_id = 26512,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
     tmax_c = TRIM(@tmax_c),
