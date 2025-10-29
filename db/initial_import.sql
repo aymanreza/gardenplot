@@ -213,3 +213,23 @@ SET location_id = 26512,
     humidity_pct = IF(@humidity_pct = '', NULL, TRIM(@humidity_pct)),
     frost_flag = CASE WHEN TRIM(@frost_flag) = 'Y' THEN TRUE ELSE FALSE END,
     source = 'VisualCrossing';
+
+LOAD DATA LOCAL INFILE 'data/plots.csv'
+INTO TABLE plots
+CHARACTER SET utf8mb4
+FIELDS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(@user_id, @location_id, @plot_name, @area_sq_m, @soil_type, @sunlight_exposure, @is_active)
+SET
+  user_id = TRIM(@user_id),
+  location_id = TRIM(@location_id),
+  plot_name = TRIM(@plot_name),
+  area_sq_m = IF(@area_sq_m = '', NULL, TRIM(@area_sq_m)),
+  soil_type = IF(@soil_type = '', NULL, TRIM(@soil_type)),
+  sunlight_exposure = IF(@sunlight_exposure = '', NULL, TRIM(@sunlight_exposure)),
+  is_active = CASE
+    WHEN LOWER(TRIM(@is_active)) IN ('1') THEN TRUE
+    ELSE FALSE
+  END;
