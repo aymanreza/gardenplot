@@ -51,7 +51,7 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
+(@ignore_obs_id, @location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
 SET location_id = 14808,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
