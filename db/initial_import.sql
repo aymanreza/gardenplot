@@ -221,7 +221,7 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(@user_id, @location_id, @plot_name, @area_sq_m, @soil_type, @sunlight_exposure, @is_active)
+(@ignore_plot_id, @user_id, @location_id, @plot_name, @area_sq_m, @soil_type, @sunlight_exposure, @is_active)
 SET
   user_id = TRIM(@user_id),
   location_id = TRIM(@location_id),
