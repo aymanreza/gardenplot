@@ -68,7 +68,7 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
+(@ignore_obs_id, @location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
 SET location_id = 26378,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
@@ -76,7 +76,7 @@ SET location_id = 26378,
     precip_mm = IF(@precip_mm = '', NULL, TRIM(@precip_mm)),
     humidity_pct = IF(@humidity_pct = '', NULL, TRIM(@humidity_pct)),
     frost_flag = CASE WHEN TRIM(@frost_flag) = 'Y' THEN TRUE ELSE FALSE END,
-    source = TRIM(@source);
+    source = 'VisualCrossing';
 
 LOAD DATA LOCAL INFILE 'data/la_weather_data.csv'
 INTO TABLE weather_observations
@@ -85,7 +85,7 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
+(@ignore_obs_id, @location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
 SET location_id = 16532,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
@@ -93,7 +93,7 @@ SET location_id = 16532,
     precip_mm = IF(@precip_mm = '', NULL, TRIM(@precip_mm)),
     humidity_pct = IF(@humidity_pct = '', NULL, TRIM(@humidity_pct)),
     frost_flag = CASE WHEN TRIM(@frost_flag) = 'Y' THEN TRUE ELSE FALSE END,
-    source = TRIM(@source);
+    source = 'VisualCrossing';
 
 LOAD DATA LOCAL INFILE 'data/nyc_weather_data.csv'
 INTO TABLE weather_observations
@@ -102,7 +102,7 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
+(@ignore_obs_id, @location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
 SET location_id = 64,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
@@ -110,7 +110,7 @@ SET location_id = 64,
     precip_mm = IF(@precip_mm = '', NULL, TRIM(@precip_mm)),
     humidity_pct = IF(@humidity_pct = '', NULL, TRIM(@humidity_pct)),
     frost_flag = CASE WHEN TRIM(@frost_flag) = 'Y' THEN TRUE ELSE FALSE END,
-    source = TRIM(@source);
+    source = 'VisualCrossing';
 
 LOAD DATA LOCAL INFILE 'data/philly_weather_data.csv'
 INTO TABLE weather_observations
@@ -119,7 +119,7 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
+(@ignore_obs_id, @location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
 SET location_id = 5526,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
@@ -127,7 +127,7 @@ SET location_id = 5526,
     precip_mm = IF(@precip_mm = '', NULL, TRIM(@precip_mm)),
     humidity_pct = IF(@humidity_pct = '', NULL, TRIM(@humidity_pct)),
     frost_flag = CASE WHEN TRIM(@frost_flag) = 'Y' THEN TRUE ELSE FALSE END,
-    source = TRIM(@source);
+    source = 'VisualCrossing';
 
 LOAD DATA LOCAL INFILE 'data/sd_weather_data.csv'
 INTO TABLE weather_observations
@@ -136,7 +136,7 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
+(@ignore_obs_id, @location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
 SET location_id = 16980,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
@@ -144,7 +144,7 @@ SET location_id = 16980,
     precip_mm = IF(@precip_mm = '', NULL, TRIM(@precip_mm)),
     humidity_pct = IF(@humidity_pct = '', NULL, TRIM(@humidity_pct)),
     frost_flag = CASE WHEN TRIM(@frost_flag) = 'Y' THEN TRUE ELSE FALSE END,
-    source = TRIM(@source);
+    source = 'VisualCrossing';
 
 LOAD DATA LOCAL INFILE 'data/seattle_weather_data.csv'
 INTO TABLE weather_observations
@@ -153,7 +153,7 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
+(@ignore_obs_id, @location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
 SET location_id = 16289,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
@@ -161,7 +161,7 @@ SET location_id = 16289,
     precip_mm = IF(@precip_mm = '', NULL, TRIM(@precip_mm)),
     humidity_pct = IF(@humidity_pct = '', NULL, TRIM(@humidity_pct)),
     frost_flag = CASE WHEN TRIM(@frost_flag) = 'Y' THEN TRUE ELSE FALSE END,
-    source = TRIM(@source);
+    source = 'VisualCrossing';
 
 LOAD DATA LOCAL INFILE 'data/sf_weather_data.csv'
 INTO TABLE weather_observations
@@ -170,7 +170,7 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
+(@ignore_obs_id, @location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
 SET location_id = 17375,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
@@ -178,7 +178,7 @@ SET location_id = 17375,
     precip_mm = IF(@precip_mm = '', NULL, TRIM(@precip_mm)),
     humidity_pct = IF(@humidity_pct = '', NULL, TRIM(@humidity_pct)),
     frost_flag = CASE WHEN TRIM(@frost_flag) = 'Y' THEN TRUE ELSE FALSE END,
-    source = TRIM(@source);
+    source = 'VisualCrossing';
 
 LOAD DATA LOCAL INFILE 'data/tx_weather_data.csv'
 INTO TABLE weather_observations
@@ -187,7 +187,7 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
+(@ignore_obs_id, @location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
 SET location_id = 22084,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
@@ -195,7 +195,7 @@ SET location_id = 22084,
     precip_mm = IF(@precip_mm = '', NULL, TRIM(@precip_mm)),
     humidity_pct = IF(@humidity_pct = '', NULL, TRIM(@humidity_pct)),
     frost_flag = CASE WHEN TRIM(@frost_flag) = 'Y' THEN TRUE ELSE FALSE END,
-    source = TRIM(@source);
+    source = 'VisualCrossing';
 
 LOAD DATA LOCAL INFILE 'data/uiuc_weather_data.csv'
 INTO TABLE weather_observations
@@ -204,7 +204,7 @@ FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
-(@location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
+(@ignore_obs_id, @location_id, @observed_on, @tmin_c, @tmax_c, @precip_mm, @humidity_pct, @frost_flag, @source)
 SET location_id = 26512,
     observed_on = STR_TO_DATE(@observed_on, '%Y-%m-%d'),
     tmin_c = TRIM(@tmin_c),
@@ -212,4 +212,4 @@ SET location_id = 26512,
     precip_mm = IF(@precip_mm = '', NULL, TRIM(@precip_mm)),
     humidity_pct = IF(@humidity_pct = '', NULL, TRIM(@humidity_pct)),
     frost_flag = CASE WHEN TRIM(@frost_flag) = 'Y' THEN TRUE ELSE FALSE END,
-    source = TRIM(@source);
+    source = 'VisualCrossing';
