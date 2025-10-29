@@ -59,7 +59,7 @@ SET location_id = 14808,
     precip_mm = IF(@precip_mm = '', NULL, TRIM(@precip_mm)),
     humidity_pct = IF(@humidity_pct = '', NULL, TRIM(@humidity_pct)),
     frost_flag = CASE WHEN TRIM(@frost_flag) = 'Y' THEN TRUE ELSE FALSE END,
-    source = TRIM(@source);
+    source = 'VisualCrossing';
 
 LOAD DATA LOCAL INFILE 'data/chi_weather_data.csv'
 INTO TABLE weather_observations
