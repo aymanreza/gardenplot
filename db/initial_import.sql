@@ -214,7 +214,7 @@ SET location_id = 26512,
     frost_flag = CASE WHEN TRIM(@frost_flag) = 'Y' THEN TRUE ELSE FALSE END,
     source = 'VisualCrossing';
 
-LOAD DATA LOCAL INFILE 'data/plots.csv'
+LOAD DATA LOCAL INFILE 'data/plots_data.csv'
 INTO TABLE plots
 CHARACTER SET utf8mb4
 FIELDS TERMINATED BY ','
