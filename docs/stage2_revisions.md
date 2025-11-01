@@ -2,7 +2,7 @@
 2) We revised most of our BCNF Normalization work.
 3) We also revised our relational schema and UML diagram based on the results from the BCNF normalization.
 
-No comments were addressed by action 1 but was slightly altered to better fit our desired design.
+No comments were directly addressed by action 1 but was slightly altered to better fit our desired design.
 
 Comments Addressed by action 2 and 3:
 
