@@ -1,7 +1,8 @@
 import express from 'express';
 import mysql from 'mysql2/promise';
+import cors from 'cors';
+import jwt from 'jsonwebtoken';
 import { Connector } from '@google-cloud/cloud-sql-connector';
-
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -25,6 +26,8 @@ const pool = mysql.createPool({
 });
 
 const app = express();
+
+app.use(cors());
 
 // health
 app.get('/api/healthz', async (_req, res) => {
@@ -67,7 +70,7 @@ app.get('/api/tables/:name/rows', async (req, res) => {
   }
 });
 
-app.get('/api/emails', async (_req, res) => {
+app.get('/api/emails', async (req, res) => {
   try {
     const [rows] = await pool.query(
       'SELECT email FROM `users` LIMIT 15'
@@ -76,6 +79,23 @@ app.get('/api/emails', async (_req, res) => {
   } catch (e) {
     console.error('emails error:', e);
     res.status(500).json({ code: e.code, message: e.sqlMessage || e.message });
+  }
+});
+
+app.post('/api/login', async(req, res) => {
+  try {
+    const { email, password } = req.body;
+    const [rows] = await pool.query(
+      'SELECT id, name, email FROM users WHERE email = ? AND password = ?', [email, password]
+    );
+    const user = rows[0];
+    if(!user) {
+    	return res.status(401).json({error: 'invalid email and password'});
+    }
+    const token = jwt.sign({userId: user.id, name: user.name, email: user.email}, 'SECRET_KEY');
+    res.json({token});
+  } catch (e) {
+    res.status(500).json({code: e.code, message: e.sqlMessage || e.message });
   }
 });
 
