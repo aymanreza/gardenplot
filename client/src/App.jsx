@@ -3,10 +3,9 @@ import './App.css';
 
 function getNameFromToken() {
   const token = localStorage.getItem('token');
-  if (!token) return null;
+  if(!token) return null;
   try {
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload.name || payload.email || null;
+    return JSON.parse(atob(token.split('.')[1])).name;
   } catch {
     return null;
   }
@@ -15,171 +14,60 @@ function getNameFromToken() {
 function App() {
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
-  const [isSignedIn, setIsSignedIn] = useState(!!localStorage.getItem('token'));
-  const [displayName, setDisplayName] = useState(getNameFromToken());
-
-  useEffect(() => {
-    setDisplayName(getNameFromToken());
-  }, [isSignedIn]);
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-    const email = e.target.email.value.trim();
-    const password = e.target.password.value;
-
+    const email = e.target[0].value;
+    const password = e.target[1].value;
     try {
       const res = await fetch('http://localhost:8080/api/login', {
         method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+	mode: 'cors',
+	headers: {'Content-Type': 'application/json'},
+	body: JSON.stringify({email, password})
       });
       const data = await res.json();
       if (res.ok) {
-        if (data.token) localStorage.setItem('token', data.token);
-        setIsSignedIn(true);
-        setShowSignInModal(false); // close after success
         alert('Login Successful');
+        setShowSignInModal(true);
+	setIsSignedIn(true);
       } else {
         alert(data.error || 'Login Failed');
       }
     } catch (err) {
-      alert(err?.message || 'Network error');
+      alert(err);
     }
-  };
-
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    const name = e.target.name.value.trim();
-    const email = e.target.email.value.trim();
-    const password = e.target.password.value;
-    const confirm = e.target.confirm.value;
-
-    if (!name) return alert('Please enter your name');
-    if (password.length < 6) return alert('Password must be at least 6 characters');
-    if (password !== confirm) return alert('Passwords do not match');
-
-    try {
-      const res = await fetch('http://localhost:8080/api/register', {
-        method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password })
-      });
-      const data = await res.json();
-      if (res.ok) {
-        if (data.token) {
-          localStorage.setItem('token', data.token);
-          setIsSignedIn(true);
-          setShowRegisterModal(false);
-          alert('Account created! You are signed in.');
-        } else {
-          alert('Account created! Please log in.');
-          setShowRegisterModal(false);
-          setShowSignInModal(true);
-        }
-      } else {
-        alert(data.error || 'Registration failed');
-      }
-    } catch (err) {
-      alert(err?.message || 'Network error');
-    }
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsSignedIn(false);
-    setDisplayName(null);
   };
 
   return (
     <div className="App">
 
-      {/* Log In Modal */}
       {showSignInModal && (
-        <div className="modal" role="dialog" aria-modal="true">
-          <span className="close" onClick={() => setShowSignInModal(false)} aria-label="Close">&times;</span>
+        <div className='modal'>
+          <span className='close' onClick = {() => setShowSignInModal(false)}>&times;</span>
           <h1>Log In</h1>
-          <form className="LogInForm" onSubmit={handleSignIn}>
-            <div className="field_pod">
+          <form className='LogInForm' onSubmit={handleSignIn}>
+            <div className='field_pod'>
               <p>Email: </p>
-              <input name="email" type="email" required />
+              <input type="email"></input>
             </div>
-            <div className="field_pod">
+            <div className='field_pod'>
               <p>Password: </p>
-              <input name="password" type="password" required />
+              <input type="password"></input>
             </div>
             <button type="submit">submit</button>
           </form>
-          <div style={{ marginTop: 12, textAlign: 'center' }}>
-            Don&apos;t have an account?{' '}
-            <button
-              type="button"
-              className="linklike"
-              onClick={() => {
-                setShowSignInModal(false);
-                setShowRegisterModal(true);
-              }}
-            >
-              Create one
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Register Modal */}
-      {showRegisterModal && (
-        <div className="modal" role="dialog" aria-modal="true">
-          <span className="close" onClick={() => setShowRegisterModal(false)} aria-label="Close">&times;</span>
-          <h1>Create Account</h1>
-          <form className="RegisterForm" onSubmit={handleRegister}>
-            <div className="field_pod">
-              <p>Name: </p>
-              <input name="name" type="text" placeholder="Jane Doe" required />
-            </div>
-            <div className="field_pod">
-              <p>Email: </p>
-              <input name="email" type="email" placeholder="jane@example.com" required />
-            </div>
-            <div className="field_pod">
-              <p>Password: </p>
-              <input name="password" type="password" required />
-            </div>
-            <div className="field_pod">
-              <p>Confirm: </p>
-              <input name="confirm" type="password" required />
-            </div>
-            <button type="submit">Create account</button>
-          </form>
-          <div style={{ marginTop: 12, textAlign: 'center' }}>
-            Already have an account?{' '}
-            <button
-              type="button"
-              className="linklike"
-              onClick={() => {
-                setShowRegisterModal(false);
-                setShowSignInModal(true);
-              }}
-            >
-              Log in
-            </button>
-          </div>
         </div>
       )}
 
       <div className="Header">
-        <img src="/logo.webp" alt="GardenPlot logo" className="logo" />
+        <img src="/logo.webp" alt="GardenPlot logo" className="logo"></img>
         <h1 className="Title">GardenPlot</h1>
-        {!isSignedIn ? (
-          <button className="reglog_cta" onClick={() => setShowSignInModal(true)}> Log In / Register </button>
-        ) : (
-          <button className="reglog_cta" onClick={handleLogout}>
-            {displayName ? `Log Out (${displayName})` : 'Log Out'}
-          </button>
-        )}
+        <button className="reglog_cta" onClick={() => setShowSignInModal(true)}> Log In / Register </button>
       </div>
 
-      <div className="MainNav">
+      <div className='MainNav'>
         <p>weather</p>
         <p>plants</p>
         <p>garden planning</p>
@@ -190,7 +78,6 @@ function App() {
 }
 
 export default App;
-
 
 /*
 export default function App() {
