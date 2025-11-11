@@ -1,9 +1,44 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
+function getNameFromToken() {
+  const token = localStorage.getItem('token');
+  if(!token) return null;
+  try {
+    return JSON.parse(atob(token.split('.')[1])).name;
+  } catch {
+    return null;
+  }
+}
+
 function App() {
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    const email = e.target[0].value;
+    const password = e.target[1].value;
+    try {
+      const res = await fetch('http://localhost:8080/api/login', {
+        method: 'POST',
+	mode: 'cors',
+	headers: {'Content-Type': 'application/json'},
+	body: JSON.stringify({email, password})
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert('Login Successful');
+        setShowSignInModal(true);
+	setIsSignedIn(true);
+      } else {
+        alert(data.error || 'Login Failed');
+      }
+    } catch (err) {
+      alert(err);
+    }
+  };
 
   return (
     <div className="App">
@@ -12,7 +47,7 @@ function App() {
         <div className='modal'>
           <span className='close' onClick = {() => setShowSignInModal(false)}>&times;</span>
           <h1>Log In</h1>
-          <form className='LogInForm'>
+          <form className='LogInForm' onSubmit={handleSignIn}>
             <div className='field_pod'>
               <p>Email: </p>
               <input type="email"></input>
@@ -21,7 +56,7 @@ function App() {
               <p>Password: </p>
               <input type="password"></input>
             </div>
-            <button>submit</button>
+            <button type="submit">submit</button>
           </form>
         </div>
       )}
