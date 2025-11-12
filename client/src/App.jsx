@@ -34,7 +34,6 @@ function App() {
     }
   };
 
-  // ----- REGISTER -----
   const handleRegister = async (e) => {
     e.preventDefault();
     const name = e.target[0].value;
@@ -130,7 +129,6 @@ function App() {
       <div className="Header">
         <img src="/logo.webp" alt="GardenPlot logo" className="logo"></img>
         <h1 className="Title">GardenPlot</h1>
-
 
 	{isSignedIn && user
 		? <h2 className="hello_user">Hello, {user.name}!</h2>
