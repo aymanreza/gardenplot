@@ -53,11 +53,42 @@ app.post('/api/login', async(req, res) => {
   }
 });
 
+app.post('/api/register', async (req, res) => {
+  try {
+    const { name, email, password } = req.body || {};
+
+    if (!name || !email || !password) {
+      return res.status(400).json({ error: 'name, email, and password are required' });
+    }
+
+    // ensure email isn’t already used
+    const [exists] = await pool.query('SELECT user_id FROM users WHERE email = ?', [email]);
+    if (exists.length > 0) {
+      return res.status(409).json({ error: 'email already registered' });
+    }
+
+    // insert
+    const [result] = await pool.query(
+      'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
+      [name, email, password] // plaintext for demo
+    );
+
+    // return same shape as /api/login
+    const payload = { user_id: result.insertId, name, email };
+    const token = jwt.sign(payload, 'SECRET_KEY'); 
+    return res.status(201).json({ token, user: payload });
+  } catch (e) {
+    if (e.code === 'ER_DUP_ENTRY') {
+      return res.status(409).json({ error: 'email already registered' });
+    }
+    return res.status(500).json({ code: e.code, message: e.sqlMessage || e.message });
+  }
+});
+
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.get('*', (_req, res) =>
   res.sendFile(path.join(__dirname, '../client/dist/index.html'))
 );
-
 
 process.on('SIGINT', async () => {
   await pool.end();
