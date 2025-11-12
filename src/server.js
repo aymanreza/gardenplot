@@ -30,57 +30,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// health
-app.get('/api/healthz', async (_req, res) => {
-  try {
-    const [rows] = await pool.query('SELECT 1 AS ok');
-    res.json(rows[0]);                // { ok: 1 }
-  } catch (e) {
-    res.status(500).json({ code: e.code, message: e.sqlMessage || e.message });
-  }
-});
-
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
-});
-
-app.get('/api/tables', async (_req, res) => {
-  try {
-    const [rows] = await pool.query(
-      `SELECT TABLE_NAME AS name
-       FROM INFORMATION_SCHEMA.TABLES
-       WHERE TABLE_SCHEMA = ?
-       ORDER BY TABLE_NAME`,
-      [process.env.DB_NAME]
-    );
-    res.json(rows.map(r => r.name));
-  } catch (e) {
-    res.status(500).json({ code: e.code, message: e.sqlMessage || e.message });
-  }
-});
-
-app.get('/api/tables/:name/rows', async (req, res) => {
-  try {
-    const limit = Math.min(parseInt(req.query.limit ?? '20', 10) || 20, 500);
-    const table = req.params.name;
-    const [rows] = await pool.query(`SELECT * FROM \`${table}\` LIMIT ?`, [limit]);
-    res.json(rows);
-  } catch (e) {
-    res.status(500).json({ code: e.code, message: e.sqlMessage || e.message });
-  }
-});
-
-app.get('/api/emails', async (req, res) => {
-  try {
-    const [rows] = await pool.query(
-      'SELECT email FROM `users` LIMIT 15'
-    );
-    res.json(rows.map(r => r.email));
-  } catch (e) {
-    console.error('emails error:', e);
-    res.status(500).json({ code: e.code, message: e.sqlMessage || e.message });
-  }
 });
 
 app.post('/api/login', async(req, res) => {
@@ -93,8 +45,9 @@ app.post('/api/login', async(req, res) => {
     if(!user) {
     	return res.status(401).json({error: 'invalid email and password'});
     }
-    const token = jwt.sign({userId: user.id, name: user.name, email: user.email}, 'SECRET_KEY');
-    res.json({token});
+    const payload = {user_id: user.user_id, name: user.name, email: user.email};
+    const token = jwt.sign(payload, 'SECRET_KEY');
+    res.json({token, user: payload});
   } catch (e) {
     res.status(500).json({code: e.code, message: e.sqlMessage || e.message });
   }

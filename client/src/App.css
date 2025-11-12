@@ -129,3 +129,8 @@ body {
   margin-top: 10px;
   font-size: 14px;
 }
+.hello_user {
+  margin: auto;
+  font-family: 'Montserrat';
+  color: #CCE2EA;
+}
